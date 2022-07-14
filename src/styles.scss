@@ -1,1 +1,187 @@
+// // Custom Theming for Angular Material
+// // For more information: https://material.angular.io/guide/theming
+// @use '@angular/material' as mat;
+// // Plus imports for other components in your app.
+
+// // Include the common styles for Angular Material. We include this here so that you only
+// // have to load a single css file for Angular Material in your app.
+// // Be sure that you only ever include this mixin once!
+// @include mat.core();
+
+// // Define the palettes for your theme using the Material Design palettes available in palette.scss
+// // (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// // hue. Available color palettes: https://material.io/design/color/
+// $InSlowApp-primary: mat.define-palette(mat.$indigo-palette);
+// $InSlowApp-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// // The warn palette is optional (defaults to red).
+// $InSlowApp-warn: mat.define-palette(mat.$red-palette);
+
+// // Create the theme object. A theme consists of configurations for individual
+// // theming systems such as "color" or "typography".
+// $InSlowApp-theme: mat.define-light-theme((
+//   color: (
+//     primary: $InSlowApp-primary,
+//     accent: $InSlowApp-accent,
+//     warn: $InSlowApp-warn,
+//   )
+// ));
+
+// // Include theme styles for core and each component used in your app.
+// // Alternatively, you can import and @include the theme mixins for each component
+// // that you are using.
+// @include mat.all-component-themes($InSlowApp-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+// Imports
+@import '~normalize.css';
+
+// Fonts
+@font-face {
+    font-family: 'MorningBreeze';
+    src: url('./assets/MorningBreeze.otf');
+}
+
+// Variables
+$mainColor: #cddc39;
+$darkVariant: #3c410b;
+$lightVariant: #e9f0a8;
+$white: #ffffff;
+$black: #000000;
+
+$ft-title: 'MorningBreeze';
+
+// styles
+body {
+    color: $darkVariant;
+    background: $lightVariant;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-wrap: break-word;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0px;
+}
+
+nav div:first-child {
+    height: 10vh;
+    background-color: $mainColor;
+    color: $lightVariant;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+nav div.display {
+    background-color: $mainColor;
+    color: $lightVariant;
+    display: flex;
+    flex-direction: column;
+    right: 1vw;
+    text-align: end;
+    padding-bottom: 1vh;
+}
+
+nav div.display a {
+    color: $white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.25vh 5vw;
+    text-decoration: none;
+}
+
+nav img {
+    margin: 1vh 2.5vw;
+    // border-radius: 48px;
+    // padding: 0;
+    height: 8vh;
+    // background: $white;
+}
+
+nav .icon {
+    margin: 1vh 2.5vw;
+    // border-radius: 48px;
+    // padding: 0;
+    height: 8vh;
+    color: $white;
+    // background: $white;
+}
+
+main {
+    height: 90vh;
+    margin: 0vh 5vw;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    font-family: $ft-title;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $mainColor;
+    border-bottom: $mainColor 1px solid;
+    margin: 1vh 10vw;
+}
+
+.center img {
+    max-width: 90vw;
+}
+
+.duo {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    border: $darkVariant 1px solid;
+    border-radius: 8px;
+    color: $darkVariant;
+    padding: 0.25vh 0.5vw;
+    // font-family: $ft-title;
+}
+
+form button {
+    margin: 0.5vh 0vw;
+    padding: 0.25vh 0.5vw;
+    // border: none;
+    border: $darkVariant 1px solid;
+    // border-top: none;
+    // border-left: none;
+    border-radius: 12px;
+    background: $mainColor;
+    color: $darkVariant;
+    font-size: 1.25rem;
+    font-weight: bold;
+    // font-family: $ft-title;
+}
+
+form a {
+    margin: 0.5vh 0vw 1.5vh 0vw;
+    text-decoration: none;
+    color: $darkVariant;
+}
+
+@media screen and(min-width: 801px) {
+    .duo {
+        flex-direction: row;
+    }
+
+    form {
+        margin: 0vh 15vw;
+    }
+}

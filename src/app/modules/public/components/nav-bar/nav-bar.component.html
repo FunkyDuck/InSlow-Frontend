@@ -1,0 +1,16 @@
+<nav>
+    <div>
+        <a routerLink="/">
+            <img src="../../../../../assets/img/logo_InSlow.svg" alt="InSlow Logo" />
+        </a>
+
+        <img src="../../../../../assets/icon/list.svg" alt="Menu Icon" class="icon" *ngIf="!display" (click)="menu()" />
+        <img src="../../../../../assets/icon/distribute-vertical.svg" alt="Menu Icon" class="icon" *ngIf="display"
+            (click)="menu()" />
+    </div>
+
+    <div *ngIf="display" class="display">
+        <a href="/">Connection</a>
+        <a href="/register">Register</a>
+    </div>
+</nav>

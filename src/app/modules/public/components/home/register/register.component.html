@@ -1,0 +1,23 @@
+<form [formGroup]="formRegister">
+    <h2>Register</h2>
+    <label for="mail">Email</label>
+    <input type="email" id="mail" name="mail" formControlName="mail" (change)="checkNameOrMail('mail')"
+        placeholder="emma.yonnaise@gmail.com" />
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" formControlName="name" (keyup)="checkNameOrMail('name')"
+        (change)="checkNameOrMail('name')" placeholder="EmmaYonnaise" />
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" formControlName="password" placeholder="password" />
+    <label for="passwordVerify">Password Verify</label>
+    <input type="password" name="passwordVerify" id="passwordVerify" formControlName="password"
+        placeholder="password" />
+    <label for="birthDate">BirthDate</label>
+    <input type="date" name="birthDate" id="birthDate" formControlName="birthDate" placeholder="21/10/1985" />
+    <label for="country">Country</label>
+    <input type="text" name="country" id="country" formControlName="country" placeholder="Belgique" />
+    <label for="city">City</label>
+    <input type="text" name="city" id="city" formControlName="city" placeholder="Bruxelles" />
+    <button (click)="register()">Register</button>
+
+    <a routerLink="/">Already registered? Connect now</a>
+</form>
