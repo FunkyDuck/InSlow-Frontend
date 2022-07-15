@@ -49,6 +49,10 @@ $darkVariant: #3c410b;
 $lightVariant: #e9f0a8;
 $white: #ffffff;
 $black: #000000;
+$red: #c0392b;
+$redLight: #f5b7b1;
+$green: #27ae60;
+$greenLight: #abebc6;
 
 $ft-title: 'MorningBreeze';
 
@@ -152,6 +156,7 @@ form input {
     border-radius: 8px;
     color: $darkVariant;
     padding: 0.25vh 0.5vw;
+    margin: 0.25vh 0;
     // font-family: $ft-title;
 }
 
@@ -176,12 +181,31 @@ form a {
     color: $darkVariant;
 }
 
+.alertRed {
+    background: $redLight;
+    border: $red 1px solid;
+    color: $red;
+    padding: 0.5vh 2vw;
+    border-radius: 12px;
+    // margin: 0.5vh 0vw;
+}
+
+.alertGreen {
+    background: $greenLight;
+    border: $green 1px solid;
+    color: $green;
+    padding: 0.5vh 2vw;
+    border-radius: 12px;
+    margin: 0.5vh 0vw;
+}
+
 @media screen and(min-width: 801px) {
     .duo {
         flex-direction: row;
     }
 
     form {
-        margin: 0vh 15vw;
+        margin: 0vh 5vw;
+        width: 30vw;
     }
 }

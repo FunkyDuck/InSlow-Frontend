@@ -1,22 +1,53 @@
 <form [formGroup]="formRegister">
     <h2>Register</h2>
     <label for="mail">Email</label>
-    <input type="email" id="mail" name="mail" formControlName="mail" (change)="checkNameOrMail('mail')"
-        placeholder="emma.yonnaise@gmail.com" />
+    <input type="email" id="mail" name="mail" formControlName="mail" (change)="checkMail()"
+        placeholder="emma.yonnaise@gmail.com" required />
+    <div class="alertRed" *ngIf="validMail">This email is already used</div>
+    <div class="alertRed"
+        *ngIf="!validMail && formRegister.controls['mail'].status == 'INVALID' && formRegister.controls['mail'].dirty">
+        This email is not
+        valid
+    </div>
+    <div class="alertGreen" *ngIf="!validMail && formRegister.controls['mail'].status == 'VALID' ">This email is not
+        used</div>
+
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" formControlName="name" (keyup)="checkNameOrMail('name')"
-        (change)="checkNameOrMail('name')" placeholder="EmmaYonnaise" />
+    <input type="text" id="name" name="name" formControlName="name" (keyup)="checkName()" (change)="checkName()"
+        (blur)="checkName()" placeholder="EmmaYonnaise" value="{{formRegister.value.name}}" />
+    <div class="alertRed" *ngIf="validName">This name is already used</div>
+    <div class="alertRed" *ngIf="!validName && nameLength < 3 && formRegister.controls['name'].dirty">
+        3 characters
+        is
+        required...</div>
+    <div class="alertRed" *ngIf="!validName && nameLength > 32 && formRegister.controls['name'].dirty">
+        Woaw... this is too big...<br>
+        Please, use a shorter name...</div>
+    <div class="alertGreen" *ngIf="!validName && nameLength >= 3 && nameLength <= 32 ">This name is free
+    </div>
+
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" formControlName="password" placeholder="password" />
+    <input type="password" name="password" id="password" formControlName="password" (keypress)="checkPassword()"
+        (change)="checkPassword()" (blur)="checkPassword()" placeholder="password" />
     <label for="passwordVerify">Password Verify</label>
-    <input type="password" name="passwordVerify" id="passwordVerify" formControlName="password"
+    <input type="password" name="passwordVerify" id="passwordVerify" formControlName="passwordVerify"
         placeholder="password" />
+    <div class="alertRed" *ngIf="passwordLength < 6 && formRegister.controls['password'].dirty">Your password is too
+        short...</div>
+    <div class="alertRed"
+        *ngIf="formRegister.value.password != formRegister.value.passwordVerify && formRegister.controls['passwordVerify'].dirty">
+        Please retype correctly your password...</div>
+    <div class="alertRed" *ngIf="isPasswordForbidden">Are you dumb ???</div>
+
     <label for="birthDate">BirthDate</label>
     <input type="date" name="birthDate" id="birthDate" formControlName="birthDate" placeholder="21/10/1985" />
+
     <label for="country">Country</label>
     <input type="text" name="country" id="country" formControlName="country" placeholder="Belgique" />
+
     <label for="city">City</label>
     <input type="text" name="city" id="city" formControlName="city" placeholder="Bruxelles" />
+
     <button (click)="register()">Register</button>
 
     <a routerLink="/">Already registered? Connect now</a>

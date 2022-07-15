@@ -12,7 +12,14 @@ import { F_REGISTER } from '../../register.form';
 export class RegisterComponent implements OnInit {
 
   formRegister: FormGroup;
-  // user?: IUser;
+  validMail: boolean = false;
+  validName: boolean = false;
+  nameLength: number = 0;
+  passwordLength: number = 0;
+  isPasswordForbidden: boolean = false;
+
+  forbiddenChar = /([^A-Za-z0-9-_.])/g;
+  forbiddenPassword = ['password', 'azerty', 'ytreza', 'qwerty', 'ytrewq', 'azertyuiop', 'poiuytreza', '123456', '012345', '123456789', '0123456789', '1234567890', '654321', '543210', '9876543210', '0987654321', 'qwerty123', 'azerty123', 'azerty123456', '1q2w3e', '12345678', '111111', '11111111', 'daniel', 'liverpool', 'chelsea', 'arsenal', 'angels', 'london', 'austin', 'antonio', 'newyork', 'new-york', 'summer', 'winter', 'sping', 'autumn', 'monday', 'thursday', 'wednesday', 'tuesday', 'friday', 'saturday', 'sunday', 'january', 'february', 'august', 'september', 'october', 'november', 'december', 'butter', 'cookie', 'cookies', 'burger', 'hamburger'];
 
   constructor(private usersService: UsersService, private _fb: FormBuilder) {
     this.formRegister = this._fb.group(F_REGISTER);
@@ -21,9 +28,39 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  checkNameOrMail(dataType: string) {
-    const data: string = (dataType == "mail") ? this.formRegister.value.mail : this.formRegister.value.name;
-    this.usersService.checkUserNameOrMail(data, dataType).subscribe(res => console.log(res.body));
+  checkMail() {
+    console.log(this.formRegister.controls['mail'].status)
+    const data: string = this.formRegister.value.mail;
+    let r: any;
+    this.usersService.checkUserNameOrMail(data, 'mail').subscribe(res => {
+      r = res.body;
+      setTimeout(() => { this.validMail = r.exist }, 25);
+    });
+  }
+
+  checkName() {
+    // console.log(this.formRegister)
+    this.formRegister.value.name = this.formRegister.value.name.replace(this.forbiddenChar, '');
+    const data: string = this.formRegister.value.name;
+    let r: any;
+    this.usersService.checkUserNameOrMail(data, 'name').subscribe(res => {
+      r = res.body;
+      setTimeout(() => {
+        this.validName = r.exist;
+        this.nameLength = this.formRegister.value.name.length;
+      }, 25);
+    });
+  }
+
+  checkPassword() {
+    setTimeout(() => {
+      const password: string = this.formRegister.value.password;
+      this.isPasswordForbidden = false;
+      if (password === this.formRegister.value.mail || password === this.formRegister.value.name || this.forbiddenPassword.includes(password.toLowerCase())) {
+        this.isPasswordForbidden = true;
+      }
+      this.passwordLength = password.length;
+    }, 25);
   }
 
   register() {
@@ -33,5 +70,4 @@ export class RegisterComponent implements OnInit {
       this.usersService.postUser(user).subscribe(res => console.log(res));
     }
   }
-
 }
