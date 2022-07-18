@@ -67,7 +67,10 @@ export class RegisterComponent implements OnInit {
     if (this.formRegister.valid) {
       const reg = this.formRegister.value;
       const user: IUser = { name: reg.name, mail: reg.mail, password: reg.password, birthDate: reg.birthDate, country: reg.country, city: reg.city };
-      this.usersService.postUser(user).subscribe(res => console.log(res));
+      this.usersService.postUser(user).subscribe(res => {
+        let d: any = res;
+        localStorage.setItem('token', d['JWT']);
+      });
     }
   }
 }

@@ -1,10 +1,16 @@
-<form>
+<form [formGroup]="formLogin">
     <h2>Connection</h2>
-    <label for="login">Email</label>
-    <input type="email" id="login" name="login" placeholder="emma.yonnaise@gmail.com" />
+    <label for="mail">Email</label>
+    <input type="email" id="mail" name="mail" placeholder="emma.yonnaise@gmail.com" formControlName="mail" />
+    <div class="alertRed" *ngIf="formLogin.controls['mail'].invalid && formLogin.controls['mail'].dirty">Your email is
+        incorrect...</div>
+
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" placeholder="password">
-    <button>Connection</button>
+    <input type="password" name="password" id="password" placeholder="password" formControlName="password" />
+    <div class="alertRed" *ngIf="formLogin.controls['password'].invalid && formLogin.controls['password'].dirty">Your
+        password is not valid...</div>
+
+    <button (click)="login()">Connection</button>
 
     <a routerLink="/register">No Account? Register now</a>
 </form>

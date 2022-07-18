@@ -17,6 +17,8 @@ import { Error404Component } from './components/error404/error404.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './components/home/auth/auth.component';
+import { LogOutComponent } from './components/home/log-out/log-out.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     NewPostComponent,
     SearchComponent,
     Error404Component,
-    NavBarComponent
+    NavBarComponent,
+    AuthComponent,
+    LogOutComponent,
   ],
   imports: [
     CommonModule,

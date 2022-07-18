@@ -9,8 +9,16 @@
             (click)="menu()" />
     </div>
 
-    <div *ngIf="display" class="display">
-        <a href="/">Connection</a>
-        <a href="/register">Register</a>
+    <!-- Not Connected NAV -->
+    <div *ngIf="display && !isConnected" class="display">
+        <a routerLink="/">Connection</a>
+        <a routerLink="/register">Register</a>
+    </div>
+
+    <!-- Connected NAV -->
+    <div *ngIf="display && isConnected" class="display">
+        <a routerLink="/user">Home</a>
+        <a routerLink="/settings">Settings</a>
+        <a routerLink="/logout">Logout</a>
     </div>
 </nav>
