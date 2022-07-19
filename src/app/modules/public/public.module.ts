@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './components/home/auth/auth.component';
 import { LogOutComponent } from './components/home/log-out/log-out.component';
+import { FriendsComponent } from './components/user/friends/friends.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { LogOutComponent } from './components/home/log-out/log-out.component';
     NavBarComponent,
     AuthComponent,
     LogOutComponent,
+    FriendsComponent,
   ],
   imports: [
     CommonModule,

@@ -19,7 +19,9 @@ export class UsersService {
 
   constructor(private http: HttpClient, private userGuard: UserGuard) { }
 
-  getUser() { }
+  getUser(name: string) {
+    return this.http.get(this.url + '/' + name, { observe: 'response' });
+  }
 
   checkUserNameOrMail(data: string, path: string) {
     const uri = this.url + "/check/" + path + "/" + data;

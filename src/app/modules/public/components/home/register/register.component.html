@@ -40,7 +40,12 @@
     <div class="alertRed" *ngIf="isPasswordForbidden">Are you dumb ???</div>
 
     <label for="birthDate">BirthDate</label>
-    <input type="date" name="birthDate" id="birthDate" formControlName="birthDate" placeholder="21/10/1985" />
+    <input type="date" name="birthDate" id="birthDate" formControlName="birthDate" placeholder="21/10/1985"
+        (blur)="checkYear()" />
+    <div class="alertRed" *ngIf="!validBirth && formRegister.controls['birthDate'].dirty">
+        InSlow don't need people under 16 years.<br>Please visit <a href="https://facebook.com">facebook</a> if you need
+        a social network for kids...
+    </div>
 
     <label for="country">Country</label>
     <input type="text" name="country" id="country" formControlName="country" placeholder="Belgique" />
