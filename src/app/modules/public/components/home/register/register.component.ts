@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
       this.usersService.postUser(user).subscribe(res => {
         let d: any = res;
         localStorage.setItem('token', d['JWT']);
-        this.router.navigateByUrl("/auth");
+        this.router.navigateByUrl("/user/wall");
       });
     }
   }

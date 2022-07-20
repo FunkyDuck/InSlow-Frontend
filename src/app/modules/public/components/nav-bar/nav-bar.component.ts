@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { IMenu } from '../../services/imenu';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -11,14 +12,22 @@ import { UsersService } from '../../services/users.service';
 export class NavBarComponent implements OnInit {
   display: boolean = false;
 
-  constructor(private userService: UsersService, private router: Router) { }
-
   isConnected: boolean = false;
+
+  links: IMenu[] = [
+    { link: '/', name: 'Connection', isConnected: false }, 
+    { link: '/register', name: 'Register', isConnected: false }, 
+    { link: '/user', name: 'Home', isConnected: true }, 
+    { link: '/user', name: 'Home', isConnected: true }
+    
+  ];
+
+
+  constructor(private userService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
     this.router.events.subscribe(events => {
       this.isConnected = this.userService.isConnected();
-      console.warn('CONNECTED :: ' + this.isConnected)
     });
 
   }
