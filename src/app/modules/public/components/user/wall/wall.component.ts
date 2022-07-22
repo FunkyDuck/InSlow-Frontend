@@ -29,17 +29,21 @@ export class WallComponent implements OnInit {
     const data = HELPER.decodeToken(JWT as any);
 
     this.userService.getUser(data.sub).subscribe(res => this.user = res.body as IUser);
+    setInterval(()=>{this.postsService.getPost().subscribe(res => this.posts = res as any as IPosts[]);},1000);
+    
   }
 
   sendPost() {
     if (this.formPost.controls['content'].valid || this.formPost.controls['media'].valid) {
       let sPost: IPosts = {
-        users: this.user?.name as string,
+        userName: this.user?.name as string,
         content: this.formPost.value.content
       };
       console.log(sPost)
 
-      this.postsService.postPost(sPost).subscribe(res => console.info(res))
+      this.postsService.postPost(sPost).subscribe(res => console.info(res));
+      // this.postsService.getPost().subscribe(res => this.posts = res as any as IPosts[]);
+      this.formPost.reset();
     } else {
       console.warn("WRONG...")
     }

@@ -10,7 +10,7 @@ export class PostService {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + JSON.stringify(localStorage.getItem('token'))
+        'Authorization': JSON.stringify(localStorage.getItem('token'))
       })
     }
   };
@@ -18,6 +18,10 @@ export class PostService {
   url: string = "http://localhost:8080/posts";
 
   constructor(private http: HttpClient) { }
+
+  getPost() {
+    return this.http.get<IPosts[]>(this.url, this.httpOptions());
+  }
 
   postPost(post: IPosts) {
     return this.http.post<IPosts>(this.url, post, this.httpOptions());

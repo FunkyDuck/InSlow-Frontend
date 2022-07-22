@@ -3,5 +3,5 @@ export interface IPosts {
     media?: any;
     content?: string;
     posted?: Date;
-    users: String;
+    userName: String;
 }

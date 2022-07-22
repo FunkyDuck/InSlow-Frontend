@@ -2,7 +2,17 @@
     <h1>Hello @{{user?.name}}</h1>
 
     <form [formGroup]="formPost">
-        <textarea name="" id="" cols="30" rows="5" placeholder="Tell your super funny adventures here..." formControlName="content"></textarea>
+        <textarea name="" id="" cols="30" rows="5" placeholder="Tell your super funny adventures here..."
+            formControlName="content"></textarea>
         <button (click)="sendPost()">Publish</button>
     </form>
+
+    <hr>
+
+    <section>
+        <article *ngFor="let p of posts">
+            <b>{{p.userName}} </b> <i>{{p.posted | date:'dd-MM-YYYY HH:mm'}}</i><br>
+            {{p.content}}
+        </article>
+    </section>
 </main>
