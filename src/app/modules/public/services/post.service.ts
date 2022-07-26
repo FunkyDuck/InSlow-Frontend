@@ -19,8 +19,8 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  getPost() {
-    return this.http.get<IPosts[]>(this.url, this.httpOptions());
+  getPost(page: number) {
+    return this.http.get<IPosts[]>(this.url + "/" + page, this.httpOptions());
   }
 
   postPost(post: IPosts) {

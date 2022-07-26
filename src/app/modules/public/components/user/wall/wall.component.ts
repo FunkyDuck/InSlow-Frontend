@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -20,10 +20,20 @@ export class WallComponent implements OnInit {
   posts?: IPosts[];
   reaction?: IReactions;
 
+  page: number = -1;
+
   formPost: FormGroup;
 
   constructor(private router: Router, private userService: UsersService, private postsService: PostService, private reactService: ReactionsService, private _fb: FormBuilder) {
     this.formPost = this._fb.group(F_POST);
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    if (window.scrollY >= (document.body.scrollHeight - document.body.offsetHeight)) {
+      console.info('LOAD MORE')
+      this.getPosts();
+    }
   }
 
   ngOnInit(): void {
@@ -32,10 +42,7 @@ export class WallComponent implements OnInit {
     const data = HELPER.decodeToken(JWT as any);
 
     this.userService.getUser(data.sub).subscribe(res => this.user = res.body as IUser);
-    this.postsService.getPost().subscribe(res => { this.posts = res as any as IPosts[], console.log(this.posts) });
-    // setInterval(() => { this.postsService.getPost().subscribe(res => this.posts = res as any as IPosts[]); }, 10000);
-
-
+    this.getPosts();
   }
 
   sendPost() {
@@ -47,8 +54,8 @@ export class WallComponent implements OnInit {
       console.log(sPost)
 
       this.postsService.postPost(sPost).subscribe(res => console.info(res));
-      // this.postsService.getPost().subscribe(res => this.posts = res as any as IPosts[]);
       this.formPost.reset();
+      this.posts?.unshift(sPost);
     } else {
       console.warn("WRONG...")
     }
@@ -59,6 +66,20 @@ export class WallComponent implements OnInit {
     this.reaction = { user: this.user?.name, post: id };
     console.log(this.reaction)
     this.reactService.postReaction(this.reaction).subscribe(res => console.log(res));
+  }
+
+  getPosts() {
+    this.page++;
+    this.postsService.getPost(this.page).subscribe(res => {
+      if (this.page == 0) {
+        this.posts = res as any as IPosts[];
+      } else {
+        let tmpArr: IPosts[] = res as any as IPosts[];
+        tmpArr.forEach(item => {
+          this.posts?.push(item);
+        });
+      }
+    });
   }
 
 }
