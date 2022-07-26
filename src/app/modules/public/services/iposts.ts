@@ -1,5 +1,5 @@
 export interface IPosts {
-    id?: number;
+    postId?: number;
     media?: any;
     content?: string;
     posted?: Date;

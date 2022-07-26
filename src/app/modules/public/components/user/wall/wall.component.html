@@ -7,12 +7,12 @@
         <button (click)="sendPost()">Publish</button>
     </form>
 
-    <hr>
-
     <section>
-        <article *ngFor="let p of posts">
+        <article *ngFor="let p of posts" class="post">
             <b>{{p.userName}} </b> <i>{{p.posted | date:'dd-MM-YYYY HH:mm'}}</i><br>
-            {{p.content}}
+            <p>{{p.content}}</p>
+            <img src="../../../../../../assets/icon/balloon-heart.svg" alt="InSlow Logo"
+                (click)="setReact(p.postId)" />
         </article>
     </section>
 </main>
