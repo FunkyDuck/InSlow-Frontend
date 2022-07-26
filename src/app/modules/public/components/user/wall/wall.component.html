@@ -10,9 +10,8 @@
     <section>
         <article *ngFor="let p of posts" class="post">
             <b>{{p.userName}} </b> <i>{{p.posted | date:'dd-MM-YYYY HH:mm'}}</i><br>
-            <p>{{p.content}}</p>
-            <img src="../../../../../../assets/icon/balloon-heart.svg" alt="InSlow Logo"
-                (click)="setReact(p.postId)" />
+            <p>{{p.content | nl2br}}</p>
+            <img src="../../../../../../assets/icon/balloon-heart.svg" alt="InSlow Logo" (click)="setReact(p.postId)" />
         </article>
     </section>
 </main>

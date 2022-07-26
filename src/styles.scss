@@ -100,6 +100,15 @@ nav div.display a {
     text-decoration: none;
 }
 
+nav div ul {
+    list-style: none;
+    margin: 0;
+}
+
+nav div ul li {
+    margin: 0.5vh 0;
+}
+
 nav img {
     margin: 1vh 2.5vw;
     // border-radius: 48px;
@@ -151,7 +160,8 @@ form {
     flex-direction: column;
 }
 
-form input, form textarea {
+form input,
+form textarea {
     border: $darkVariant 1px solid;
     border-radius: 8px;
     color: $darkVariant;
@@ -220,7 +230,7 @@ article:first-child {
         width: 30vw;
     }
 
-    form{
+    form {
         margin: 0vh 5vw;
     }
 

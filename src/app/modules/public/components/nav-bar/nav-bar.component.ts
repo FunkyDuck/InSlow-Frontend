@@ -15,11 +15,12 @@ export class NavBarComponent implements OnInit {
   isConnected: boolean = false;
 
   links: IMenu[] = [
-    { link: '/', name: 'Connection', isConnected: false }, 
-    { link: '/register', name: 'Register', isConnected: false }, 
-    { link: '/user', name: 'Home', isConnected: true }, 
-    { link: '/user', name: 'Home', isConnected: true }
-    
+    { link: '/', name: 'Connection', isConnected: false },
+    { link: '/register', name: 'Register', isConnected: false },
+    { link: '/user', name: 'Home', isConnected: true },
+    { link: '/user/settings', name: 'Settings', isConnected: true },
+    { link: '/logout', name: 'Logout', isConnected: true }
+
   ];
 
 

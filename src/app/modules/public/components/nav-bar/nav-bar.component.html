@@ -11,14 +11,15 @@
 
     <!-- Not Connected NAV -->
     <div *ngIf="display && !isConnected" class="display">
-        <a routerLink="/">Connection</a>
-        <a routerLink="/register">Register</a>
+        <ul *ngFor="let l of links">
+            <li *ngIf="l.isConnected == false"><a routerLink="{{l.link}}" (click)="menu()">{{l.name}}</a></li>
+        </ul>
     </div>
 
     <!-- Connected NAV -->
     <div *ngIf="display && isConnected" class="display">
-        <a routerLink="/user/">Home</a> 
-        <a routerLink="/user/settings">Settings</a>
-        <a routerLink="/logout">Logout</a>
+        <ul *ngFor="let l of links">
+            <li *ngIf="l.isConnected == true"><a routerLink="{{l.link}}" (click)="menu()">{{l.name}}</a></li>
+        </ul>
     </div>
 </nav>
