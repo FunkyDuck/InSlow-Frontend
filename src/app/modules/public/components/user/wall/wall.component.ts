@@ -20,6 +20,8 @@ export class WallComponent implements OnInit {
   posts?: IPosts[];
   reaction?: IReactions;
 
+  visiblePosts : number[] = []
+
   page: number = -1;
 
   formPost: FormGroup;
@@ -98,5 +100,9 @@ export class WallComponent implements OnInit {
         r = true;
     });
     return r;
+  }
+
+  displayCommentForm(cf: number = 0) {
+    this.visiblePosts.push(cf)
   }
 }

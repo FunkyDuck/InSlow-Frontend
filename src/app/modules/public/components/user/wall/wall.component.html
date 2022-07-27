@@ -12,10 +12,31 @@
             <b>{{p.userName}} </b> <i>{{p.posted | date:'dd-MM-YYYY HH:mm'}}</i><br>
             <p>{{p.content}}</p>
 
-            <span *ngIf="p?.reactions?.length">{{p.reactions?.length }}</span>
+            <div>
+                <div>
+                    <span *ngIf="p?.reactions?.length">{{p.reactions?.length }}</span>
 
-            <img src="../../../../../../assets/icon/balloon-heart-fill.svg" *ngIf="displayFillLike(p?.reactions) == true" alt="InSlow Logo" (click)="setReact(p.postId)" />
-            <img src="../../../../../../assets/icon/balloon-heart.svg" *ngIf="displayFillLike(p?.reactions) == false" alt="InSlow Logo" (click)="setReact(p.postId)" />
+                    <img src="../../../../../../assets/icon/balloon-heart-fill.svg"
+                        *ngIf="displayFillLike(p?.reactions) == true" alt="InSlow Logo" (click)="setReact(p.postId)" />
+                    <img src="../../../../../../assets/icon/balloon-heart.svg"
+                        *ngIf="displayFillLike(p?.reactions) == false" alt="InSlow Logo" (click)="setReact(p.postId)" />
+                </div>
+
+                <div>
+                    <span class="link" (click)="displayCommentForm(p.postId)"><img
+                            src="../../../../../../assets/icon/chat-square-text.svg"> Comment</span>
+                </div>
+            </div>
+
+            <section>
+                <form [ngClass]="{
+                    'hidden': !visiblePosts.includes(p.postId!)
+                }" id="cf{{p?.postId}}">
+                    <textarea name="" id="" cols="30" rows="2.5" placeholder="How, your story is very very fantastic..."></textarea>
+                    <button></button>
+                </form>
+            </section>
+
         </article>
     </section>
 </main>

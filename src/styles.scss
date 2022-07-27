@@ -192,6 +192,12 @@ form a {
     color: $darkVariant;
 }
 
+a,
+span.link {
+    color: $darkVariant;
+    font-weight: bold;
+}
+
 article {
     margin: 1vh 0;
 }
@@ -204,6 +210,19 @@ article.border {
 
 article:first-child {
     margin-top: 2vh
+}
+
+article div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-top: $darkVariant 1px solid;
+    padding: 1vh 0;
+}
+
+article div div {
+    border: none;
+    padding: 0;
 }
 
 .alertRed {
@@ -222,6 +241,10 @@ article:first-child {
     padding: 0.5vh 2vw;
     border-radius: 12px;
     margin: 0.5vh 0vw;
+}
+
+.hidden {
+    display: none;
 }
 
 @media screen and(min-width: 801px) {
