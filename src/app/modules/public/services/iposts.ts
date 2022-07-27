@@ -4,4 +4,5 @@ export interface IPosts {
     content?: string;
     posted?: Date;
     userName: String;
+    reactions?: any[];
 }

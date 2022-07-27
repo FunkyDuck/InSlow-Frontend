@@ -193,9 +193,12 @@ form a {
 }
 
 article {
+    margin: 1vh 0;
+}
+
+article.border {
     border: 1px solid $mainColor;
     border-radius: 12px;
-    margin: 1vh 0;
     padding: 1vh 2vw;
 }
 

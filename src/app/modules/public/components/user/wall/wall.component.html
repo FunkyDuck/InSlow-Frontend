@@ -8,10 +8,14 @@
     </form>
 
     <section>
-        <article *ngFor="let p of posts" class="post">
+        <article *ngFor="let p of posts" class="border">
             <b>{{p.userName}} </b> <i>{{p.posted | date:'dd-MM-YYYY HH:mm'}}</i><br>
             <p>{{p.content}}</p>
-            <img src="../../../../../../assets/icon/balloon-heart.svg" alt="InSlow Logo" (click)="setReact(p.postId)" />
+
+            <span *ngIf="p?.reactions?.length">{{p.reactions?.length }}</span>
+
+            <img src="../../../../../../assets/icon/balloon-heart-fill.svg" *ngIf="displayFillLike(p?.reactions) == true" alt="InSlow Logo" (click)="setReact(p.postId)" />
+            <img src="../../../../../../assets/icon/balloon-heart.svg" *ngIf="displayFillLike(p?.reactions) == false" alt="InSlow Logo" (click)="setReact(p.postId)" />
         </article>
     </section>
 </main>

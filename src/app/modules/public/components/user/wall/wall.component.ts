@@ -31,7 +31,6 @@ export class WallComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
     if (window.scrollY >= (document.body.scrollHeight - document.body.offsetHeight)) {
-      console.info('LOAD MORE')
       this.getPosts();
     }
   }
@@ -64,8 +63,13 @@ export class WallComponent implements OnInit {
   setReact(id: any) {
     console.info(id)
     this.reaction = { user: this.user?.name, post: id };
-    console.log(this.reaction)
     this.reactService.postReaction(this.reaction).subscribe(res => console.log(res));
+    const r = this.posts?.forEach(p => {
+      if (p.postId === id && p.userName !== this.user?.name) {
+        p.reactions?.push({ userId: 0, userName: this.user?.name, reactionType: "LIKE" });
+      }
+    });
+    console.log(r)
   }
 
   getPosts() {
@@ -75,11 +79,24 @@ export class WallComponent implements OnInit {
         this.posts = res as any as IPosts[];
       } else {
         let tmpArr: IPosts[] = res as any as IPosts[];
-        tmpArr.forEach(item => {
-          this.posts?.push(item);
-        });
+        if (tmpArr.length > 0) {
+          tmpArr.forEach(item => {
+            this.posts?.push(item);
+          });
+        }
+        else {
+          this.page--;
+        }
       }
     });
   }
 
+  displayFillLike(item: any[] = []): boolean {
+    let r: boolean = false;
+    item.forEach(e => {
+      if (e.userName == this.user?.name)
+        r = true;
+    });
+    return r;
+  }
 }
