@@ -1,12 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserGuard } from '../user.guard';
-import { IReactions } from './ireactions';
+import { IComment } from './icomment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReactionsService {
+export class CommentService {
   httpOptions() {
     return {
       headers: new HttpHeaders({
@@ -16,12 +15,13 @@ export class ReactionsService {
     }
   };
 
-  // url: string = "https://localhost:51564/reaction"; // DEV
-  url: string = "https://inslow.tk:51564/reaction"; // PROD
+  // url: string = "https://localhost:51564/comments"; // DEV
+  url: string = "https://inslow.tk:51564/comments"; // PROD
 
   constructor(private http: HttpClient) { }
 
-  postReaction(reaction: IReactions) {
-    return this.http.post(this.url, reaction, this.httpOptions());
+  postComment(comment: IComment) {
+    console.info(comment)
+    return this.http.post(this.url, comment, this.httpOptions());
   }
 }

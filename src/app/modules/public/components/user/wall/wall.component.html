@@ -4,7 +4,10 @@
     <form [formGroup]="formPost">
         <textarea name="" id="" cols="30" rows="5" placeholder="Tell your super funny adventures here..."
             formControlName="content"></textarea>
-        <button (click)="sendPost()">Publish</button>
+        <!-- <div class="buttons"> -->
+            <!-- <button>Picture</button> -->
+            <button (click)="sendPost()">Publish</button>
+        <!-- </div> -->
     </form>
 
     <section>
@@ -16,27 +19,35 @@
                 <div>
                     <span *ngIf="p?.reactions?.length">{{p.reactions?.length }}</span>
 
-                    <img src="../../../../../../assets/icon/balloon-heart-fill.svg"
-                        *ngIf="displayFillLike(p?.reactions) == true" alt="InSlow Logo" (click)="setReact(p.postId)" />
-                    <img src="../../../../../../assets/icon/balloon-heart.svg"
-                        *ngIf="displayFillLike(p?.reactions) == false" alt="InSlow Logo" (click)="setReact(p.postId)" />
+                    <img src="{{ICO}}balloon-heart-fill.svg" *ngIf="displayFillLike(p?.reactions) == true"
+                        alt="Liked icon" (click)="setReact(p.postId)" />
+                    <img src="{{ICO}}balloon-heart.svg" *ngIf="displayFillLike(p?.reactions) == false"
+                        alt="Not Liked icon" (click)="setReact(p.postId)" />
                 </div>
 
                 <div>
-                    <span class="link" (click)="displayCommentForm(p.postId)"><img
-                            src="../../../../../../assets/icon/chat-square-text.svg"> Comment</span>
+                    <span class="link" (click)="displayCommentForm(p.postId)"><img src="{{ICO}}chat-square-text.svg"
+                            alt="comment icon"> Comment</span>
                 </div>
             </div>
 
             <section>
                 <form [ngClass]="{
                     'hidden': !visiblePosts.includes(p.postId!)
-                }" id="cf{{p?.postId}}">
-                    <textarea name="" id="" cols="30" rows="2.5" placeholder="How, your story is very very fantastic..."></textarea>
-                    <button></button>
+                }" id="cf{{p?.postId}}" [formGroup]="formComment">
+                    <textarea name="" id="" cols="30" rows="2.5" placeholder="How, your story is very very fantastic..."
+                        formControlName="content"></textarea>
+                    <button (click)="setComment(p.postId)">Comment</button>
                 </form>
             </section>
 
+            <section *ngIf="p?.comments?.length">
+                <article *ngFor="let c of p?.comments" class="comment">
+                    <p><b>{{c.userName}}</b> <i>{{c.posted}}</i></p>
+
+                    <p>{{c.content}}</p>
+                </article>
+            </section>
         </article>
     </section>
 </main>

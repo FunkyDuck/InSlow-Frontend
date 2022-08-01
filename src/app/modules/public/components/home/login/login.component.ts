@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.userService.isConnected())
+      this.router.navigateByUrl("/user/wall");
   }
 
   login() {

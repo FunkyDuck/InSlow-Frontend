@@ -20,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './components/home/auth/auth.component';
 import { LogOutComponent } from './components/home/log-out/log-out.component';
 import { FriendsComponent } from './components/user/friends/friends.component';
+import { AboutComponent } from './components/home/about/about.component';
+import { UseConditionsComponent } from './components/home/use-conditions/use-conditions.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { FriendsComponent } from './components/user/friends/friends.component';
     AuthComponent,
     LogOutComponent,
     FriendsComponent,
+    AboutComponent,
+    UseConditionsComponent,
   ],
   imports: [
     CommonModule,

@@ -15,7 +15,8 @@ export class PostService {
     }
   };
 
-  url: string = "http://localhost:8080/posts";
+  // url: string = "https://localhost:51564/posts"; // DEV
+  url: string = "https://inslow.tk:51564/posts"; // PROD
 
   constructor(private http: HttpClient) { }
 

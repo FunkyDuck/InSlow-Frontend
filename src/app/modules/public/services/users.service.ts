@@ -15,7 +15,8 @@ export class UsersService {
     })
   };
 
-  url: string = "http://localhost:8080/user";
+  // url: string = "https://localhost:51564/user"; // DEV
+  url: string = "https://inslow.tk:51564/user"; // PROD
 
   constructor(private http: HttpClient, private userGuard: UserGuard) { }
 
@@ -25,7 +26,7 @@ export class UsersService {
 
   checkUserNameOrMail(data: string, path: string) {
     const uri = this.url + "/check/" + path + "/" + data;
-    return this.http.get<boolean>(uri, { observe: 'response' });
+    return this.http.get(uri, { observe: 'response' });
   }
 
   postUser(user: IUser) {

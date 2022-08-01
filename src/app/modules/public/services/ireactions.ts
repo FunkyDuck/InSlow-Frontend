@@ -1,5 +1,6 @@
 export interface IReactions {
-    id?: number;
-    user?: String;
+    userId?: number;
+    userName?: string;
     post?: number;
+    reactionType?: string;
 }

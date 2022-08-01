@@ -10,16 +10,22 @@
     </div>
 
     <!-- Not Connected NAV -->
-    <div *ngIf="display && !isConnected" class="display">
+    <!-- <div *ngIf="display && !isConnected" class="display">
         <ul *ngFor="let l of links">
             <li *ngIf="l.isConnected == false"><a routerLink="{{l.link}}" (click)="menu()">{{l.name}}</a></li>
         </ul>
-    </div>
+    </div> -->
 
     <!-- Connected NAV -->
-    <div *ngIf="display && isConnected" class="display">
+    <!-- <div *ngIf="display && isConnected" class="display">
         <ul *ngFor="let l of links">
             <li *ngIf="l.isConnected == true"><a routerLink="{{l.link}}" (click)="menu()">{{l.name}}</a></li>
+        </ul>
+    </div> -->
+
+    <div *ngIf="display" class="display">
+        <ul *ngFor="let l of links">
+            <li *ngIf="l.isConnected == isConnected || l.isConnected == undefined"><a routerLink="{{l.link}}" (click)="menu()">{{l.name}}</a></li>
         </ul>
     </div>
 </nav>

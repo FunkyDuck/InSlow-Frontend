@@ -2,12 +2,15 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CommentService } from '../../../services/comment.service';
+import { IComment } from '../../../services/icomment';
 import { IPosts } from '../../../services/iposts';
 import { IReactions } from '../../../services/ireactions';
 import { IUser } from '../../../services/iuser';
 import { PostService } from '../../../services/post.service';
 import { ReactionsService } from '../../../services/reactions.service';
 import { UsersService } from '../../../services/users.service';
+import { F_COMMENT } from '../../comment.form';
 import { F_POST } from '../../post.form';
 
 @Component({
@@ -16,18 +19,28 @@ import { F_POST } from '../../post.form';
   styleUrls: ['./wall.component.scss']
 })
 export class WallComponent implements OnInit {
+  ICO: string = '../../../../../../assets/icon/';
   user?: IUser;
   posts?: IPosts[];
   reaction?: IReactions;
 
-  visiblePosts : number[] = []
+  visiblePosts: number[] = []
 
   page: number = -1;
 
   formPost: FormGroup;
+  formComment: FormGroup;
 
-  constructor(private router: Router, private userService: UsersService, private postsService: PostService, private reactService: ReactionsService, private _fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private userService: UsersService,
+    private postsService: PostService,
+    private reactService: ReactionsService,
+    private commentService: CommentService,
+    private _fb: FormBuilder
+  ) {
     this.formPost = this._fb.group(F_POST);
+    this.formComment = this._fb.group(F_COMMENT);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -52,7 +65,6 @@ export class WallComponent implements OnInit {
         userName: this.user?.name as string,
         content: this.formPost.value.content
       };
-      console.log(sPost)
 
       this.postsService.postPost(sPost).subscribe(res => console.info(res));
       this.formPost.reset();
@@ -63,8 +75,7 @@ export class WallComponent implements OnInit {
   }
 
   setReact(id: any) {
-    console.info(id)
-    this.reaction = { user: this.user?.name, post: id };
+    this.reaction = { userName: this.user?.name, post: id };
     this.reactService.postReaction(this.reaction).subscribe(res => console.log(res));
     const r = this.posts?.forEach(p => {
       if (p.postId === id && p.userName !== this.user?.name) {
@@ -91,6 +102,18 @@ export class WallComponent implements OnInit {
         }
       }
     });
+  }
+
+  setComment(id: any) {
+    if (this.formComment.controls['content'].valid) {
+      let newComment: IComment = { post: id, userName: this.user?.name, content: this.formComment.value.content };
+      this.commentService.postComment(newComment).subscribe();
+      const c = this.posts?.forEach(p => {
+        if (p.postId === id)
+          p.comments?.push(newComment);
+      });
+    }
+    this.formComment.reset();
   }
 
   displayFillLike(item: any[] = []): boolean {

@@ -69,7 +69,8 @@ body {
 nav {
     display: flex;
     flex-direction: column;
-    position: sticky;
+    position: fixed;
+    width: 100vw;
     top: 0px;
 }
 
@@ -129,6 +130,7 @@ nav .icon {
 main {
     height: 90vh;
     margin: 0vh 5vw;
+    margin-top: 10vh;
 }
 
 .center {
@@ -212,7 +214,8 @@ article:first-child {
     margin-top: 2vh
 }
 
-article div {
+article div,
+.comment {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -220,9 +223,40 @@ article div {
     padding: 1vh 0;
 }
 
+.comment {
+    padding: 0;
+    justify-content: start;
+    margin: 0 -0.5vw;
+    flex-direction: column;
+}
+
+.comment p {
+    margin: 0.5vh 0.25vw 0.25vh 0.25vw;
+}
+
 article div div {
     border: none;
     padding: 0;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons button {
+    border-radius: 0;
+    display: inline;
+    border-left: none;
+}
+
+.buttons button:first-child {
+    border-radius: 12px 0 0 12px;
+    border-left: $darkVariant 1px solid;
+}
+
+.buttons button:last-child {
+    border-radius: 0 12px 12px 0;
 }
 
 .alertRed {

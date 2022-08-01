@@ -28,6 +28,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.usersService.isConnected())
+      this.router.navigateByUrl("/user/wall");
   }
 
   checkMail() {

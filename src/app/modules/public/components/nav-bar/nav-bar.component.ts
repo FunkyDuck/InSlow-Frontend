@@ -19,7 +19,9 @@ export class NavBarComponent implements OnInit {
     { link: '/register', name: 'Register', isConnected: false },
     { link: '/user', name: 'Home', isConnected: true },
     { link: '/user/settings', name: 'Settings', isConnected: true },
-    { link: '/logout', name: 'Logout', isConnected: true }
+    { link: '/logout', name: 'Logout', isConnected: true },
+    { link: '/use', name: 'Conditions of use' },
+    { link: '/about', name: 'About' }
 
   ];
 
